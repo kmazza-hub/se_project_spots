@@ -33,7 +33,7 @@
 .card__like-button {
   background-image: url(../images/heart.svg);
   background-repeat: no-repeat;
-  height: 23px;
+  height: 20px;
   width: 23px;
   border: none;
   background-color: transparent;
@@ -51,6 +51,7 @@
 @media screen and (max-width: 627px) {
   .card__image {
     height: 288px;
+    width: 288px;
   }
 
   .card__content {
@@ -60,8 +61,11 @@
 
   .card__title {
     font-size: 16px;
+    font-weight: 500;
     line-height: 16px;
-    max-width: 95px;
+    text-align: left;
+    justify-content: space-between;
+    font-weight: 500px;
   }
 
   .card__like-button {
