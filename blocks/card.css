@@ -1,6 +1,4 @@
-.card {
-  position: relative;
-}
+
 
 .card__image {
   height: 413px;
@@ -8,7 +6,7 @@
   object-fit: cover;
   display: block;
   border-radius: 8px;
-  cursor: pointer;
+
 }
 
 .card__content {
@@ -38,7 +36,6 @@
   background-color: transparent;
   opacity: 40%;
   cursor: pointer;
-  repeat: none;
   background-size: cover;
 }
 
