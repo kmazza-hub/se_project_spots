@@ -66,6 +66,7 @@
   font-weight: 500;
   line-height: 16px;
   text-align: left;
+  cursor: pointer;
 }
 
 .profile__add-btn {
@@ -84,6 +85,7 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 16px;
+  cursor: pointer;
 }
 
 .profile__add-btn:hover {
