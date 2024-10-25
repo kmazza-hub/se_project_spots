@@ -19,7 +19,7 @@
 .card__title {
   margin: 12px 0 0;
   color: rgba(33, 33, 33, 1);
-  font-weight: 500px;
+  font-weight: 500;
   font-size: 20px;
   line-height: 24px;
   text-align: left;
@@ -61,11 +61,10 @@
 
   .card__title {
     font-size: 16px;
-    font-weight: 500;
     line-height: 16px;
     text-align: left;
     justify-content: space-between;
-    font-weight: 500px;
+
   }
 
   .card__like-button {
