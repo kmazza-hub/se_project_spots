@@ -72,7 +72,7 @@
 }
 
 .profile__edit-btn:hover {
-  background-color: rgba(33, 33, 33, 0.8);
+  opacity: 1;
 }
 
 .profile__add-btn {
