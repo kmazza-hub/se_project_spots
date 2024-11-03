@@ -1,3 +1,4 @@
+
 .card__image-container {
   display: flex;
   position: relative;
@@ -31,7 +32,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 350px;
+  max-width: 353px;
 
 }
 
@@ -44,6 +45,7 @@
   background-color: transparent;
   opacity: 40%;
   cursor: pointer;
+
 
 
 }
