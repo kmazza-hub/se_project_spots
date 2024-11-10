@@ -17,7 +17,7 @@
   visibility: visible;
 }
 
-.modal__container {
+.modal__content {
   background-color: white;
   max-width: 730px;
   padding: 32px 50px;
@@ -35,6 +35,7 @@
   right: 50px;
   width: 40px;
   height: 40px;
+  background-image: url(../images/CloseIcon.svg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,10 +81,12 @@
 
 .modal__submit-btn {
   width: 156px;
-  padding: 18px 0;
-  border-radius: 8px;
-  background-color: rgba(33, 33, 33, 1);
-  color: white;
+  height: 52px;
+  border: none;
+  padding: 18px 32px;
+  gap: 8px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 
@@ -92,7 +95,7 @@
     padding: 0 10px;
   }
 
-  .modal__container {
+  .modal__content {
     padding: 12px;
     margin: 134px 10px auto;
   }
