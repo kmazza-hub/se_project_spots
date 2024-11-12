@@ -8,14 +8,16 @@
   object-fit: cover;
   display: block;
   border-radius: 8px;
-  margin: 0;
+  margin-bottom: 12px;
 }
+
 .card__content {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 12px;
 }
+
 .card__like-btn {
   background-image: url(../images/heart.svg);
   background-repeat: no-repeat;
@@ -23,14 +25,18 @@
   height: 20px;
   border: none;
   background-color: transparent;
-  opacity: 0.4;
+  opacity: 40%;
 }
+
 .card__like-btn:hover {
   cursor: pointer;
-  opacity: 1;
+  opacity: 100%;
+  transition: opacity .6s ease;
+
 }
+
 .card__delete-button {
-  background: transparent url(../images/trash-default.svg);
+  background: transparent url(../images/trash-button.svg);
   background-size: contain;
   position: absolute;
   width: 32px;
@@ -67,6 +73,10 @@
 @media screen and (max-width: 627px) {
   .card__image {
     height: 288px;
+    width: 288px;
+  }
+  .card__content {
+    max-width: 288px;
   }
   .card__title {
     max-width: 240px;
