@@ -152,7 +152,44 @@
 
 @media screen and (max-width: 320px) {
 
-  .modal {
+    .modal__content_type_preview {
+      width: 90%;
+      height: auto;
+      padding: 0;
+      background-color: transparent;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    .modal__image {
+      width: 100%;
+      height: auto;
+      max-height: 60vh;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .modal__close-btn_type_preview {
+      position: absolute;
+      top: -16px;
+      right: -16px;
+      width: 24px;
+      height: 24px;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    .modal {
+      padding: 0 10px;
+    }
+  }
+
+
+
+  /*.modal {
     padding: 0 10px;
     max-width: 100%;
   }
@@ -164,7 +201,7 @@
     margin: 10px 0 44px;
   }
   .modal__close-btn {
-    top: 4px;
+    top: 4x;
     right: 3px;
   }
   .modal__label {
