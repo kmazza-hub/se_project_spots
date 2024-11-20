@@ -154,10 +154,12 @@
   .modal {
     padding: 10px;
   }
-  .modal__container {
+  .modal__content {
     padding: 12px;
   }
   .modal__title {
+    line-height: 20px;
+    margin-bottom: 34px;
     font-size: 20px;
     margin: 10px 0 44px;
   }
@@ -167,6 +169,8 @@
   }
   .modal__label {
     margin-bottom: 24px;
+    font-size: 16px;
+    line-height: 17.6px;
   }
   .modal__submit-btn {
     width: 100%;
@@ -192,9 +196,11 @@
       max-height: 60vh;
       object-fit: cover;
       border-radius: 8px;
+      max-width: fit-content;
     }
 
     .modal__close-btn_type_preview {
+
       position: absolute;
       top: 41px;
       left: 264px;
