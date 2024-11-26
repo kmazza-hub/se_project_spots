@@ -57,12 +57,12 @@ const setEventListeners = (formEl, config) => {
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
-      checkInputValidity(formEl, inputElement);
+      checkInputValidity(formEl, inputElement, config);
       toggleButtonState(inputList, buttonElement);
     });
   });
 
-  toggleButtonState(inputList, buttonElement);
+  toggleButtonState(inputList, buttonElement, config);
 };
 
 const enableValidation = (config) => {

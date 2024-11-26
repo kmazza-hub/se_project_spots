@@ -169,6 +169,11 @@ margin-top: 8px;
   transition: background-color 0.3s ease;
 }
 
+.modal__button_disabled {
+  background-color: #212121;
+  opacity: 30%;
+}
+
 .modal__submit-btn:hover {
   background-color: rgba(60, 60, 60, 1);
   cursor: pointer;
