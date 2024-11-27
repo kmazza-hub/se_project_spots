@@ -9,14 +9,18 @@ const settings = {
 
 const showInputError = (formEl, inputEl, errorMsg) => {
   const errorMsgEl = formEl.querySelector(`#${inputEl.id}-error`);
-  errorMsgEl.textContent = errorMsg;
-  inputEl.classList.add("modal__input_type_error");
+  if (errorMsgEl) {
+    errorMsgEl.textContent = errorMsg;
+    inputEl.classList.add(settings.inputErrorClass);
+  }
 };
 
 const hideInputError = (formEl, inputEl) => {
   const errorMsgEl = document.querySelector(`#${inputEl.id}-error`);
-  errorMsgEl.textContent = "";
-  inputEl.classList.remove("modal__input_type_error");
+  if (errorMsgEl) {
+    errorMsgEl.textContent = "";
+    inputEl.classList.remove(settings.inputErrorClass);
+  }
 };
 
 const checkInputValidity = (formEl, inputEl) => {
@@ -32,18 +36,22 @@ const hasInvalidInput = (inputList) => {
     return !input.validity.valid;
   });
 };
+
 const resetValidation = (formEl) => {
   const inputs = formEl.querySelectorAll(settings.inputSelector);
-  inputs.forEach((inputEl) => hideInputError(formEl, inputEl));
+  inputs.forEach((inputEl) => {
+    hideInputError(formEl, inputEl);
+    inputEl.removeAttribute("aria-describedby");
+  });
+
+  const buttonEl = formEl.querySelector(settings.submitButtonSelector);
+  disableButton(buttonEl);
 };
 
 const toggleButtonState = (inputList, buttonEl) => {
-  if (hasInvalidInput(inputList)) {
-    disableButton(buttonEl);
-  } else {
-    buttonEl.disabled = false;
-    buttonEl.classList.remove(settings.inactiveButtonClass);
-  }
+  const isFormInvalid = hasInvalidInput(inputList);
+  buttonEl.disabled = isFormInvalid;
+  buttonEl.classList.toggle(settings.inactiveButtonClass, isFormInvalid);
 };
 
 const disableButton = (buttonEl) => {
@@ -57,12 +65,12 @@ const setEventListeners = (formEl, config) => {
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
-      checkInputValidity(formEl, inputElement, config);
+      checkInputValidity(formEl, inputElement);
       toggleButtonState(inputList, buttonElement);
     });
   });
 
-  toggleButtonState(inputList, buttonElement, config);
+  toggleButtonState(inputList, buttonElement);
 };
 
 const enableValidation = (config) => {
@@ -71,5 +79,7 @@ const enableValidation = (config) => {
     setEventListeners(formEl, config);
   });
 };
+
+
 
 enableValidation(settings);
