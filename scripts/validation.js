@@ -1,22 +1,23 @@
+
 const settings = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__submit-btn",
-  inactiveButtonClass: "modal__button_disabled",
+  inactiveButtonClass: "modal__submit-btn_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
 
-const showInputError = (formEl, inputEl, errorMsg) => {
+const showInputError = (formEl, inputEl, errorMsg, config) => {
   const errorMsgEl = formEl.querySelector(`#${inputEl.id}-error`);
   if (errorMsgEl) {
     errorMsgEl.textContent = errorMsg;
-    inputEl.classList.add(settings.inputErrorClass);
+    inputEl.classList.add(config.inputErrorClass);
   }
 };
 
 const hideInputError = (formEl, inputEl) => {
-  const errorMsgEl = document.querySelector(`#${inputEl.id}-error`);
+  const errorMsgEl = formEl.querySelector(`#${inputEl.id}-error`);
   if (errorMsgEl) {
     errorMsgEl.textContent = "";
     inputEl.classList.remove(settings.inputErrorClass);
@@ -79,7 +80,5 @@ const enableValidation = (config) => {
     setEventListeners(formEl, config);
   });
 };
-
-
 
 enableValidation(settings);

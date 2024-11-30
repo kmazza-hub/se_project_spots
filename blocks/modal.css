@@ -169,7 +169,7 @@ margin-top: 8px;
   transition: background-color 0.3s ease;
 }
 
-.modal__button_disabled {
+.modal__submit-btn_disabled {
   background-color: #212121;
   opacity: 30%;
 }
@@ -190,7 +190,10 @@ margin-top: 8px;
   }
 
   .modal__image {
-    max-width: 288px;
+    width: 288px;
+    height: 192px;
+    object-fit: cover;
+    max-width: unset;
   }
 
   .modal__content_type_preview {
