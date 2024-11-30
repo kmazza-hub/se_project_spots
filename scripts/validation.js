@@ -12,23 +12,24 @@ const showInputError = (formEl, inputEl, errorMsg, config) => {
   const errorMsgEl = formEl.querySelector(`#${inputEl.id}-error`);
   if (errorMsgEl) {
     errorMsgEl.textContent = errorMsg;
-    inputEl.classList.add(config.inputErrorClass);
+    inputEl.classList.add(settings.inputErrorClass);
   }
 };
 
-const hideInputError = (formEl, inputEl) => {
-  const errorMsgEl = formEl.querySelector(`#${inputEl.id}-error`);
+const hideInputError = (formEl, inputEl, config) => {
+  const errorMsgEl = document.querySelector(`#${inputEl.id}-error`);
   if (errorMsgEl) {
     errorMsgEl.textContent = "";
     inputEl.classList.remove(settings.inputErrorClass);
   }
 };
 
-const checkInputValidity = (formEl, inputEl) => {
+
+const checkInputValidity = (formEl, inputEl, config) => {
   if (!inputEl.validity.valid) {
-    showInputError(formEl, inputEl, inputEl.validationMessage);
+    showInputError(formEl, inputEl, inputEl.validationMessage, config);
   } else {
-    hideInputError(formEl, inputEl);
+    hideInputError(formEl, inputEl,config);
   }
 };
 
