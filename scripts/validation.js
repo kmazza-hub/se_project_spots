@@ -1,4 +1,3 @@
-
 const settings = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
@@ -8,11 +7,11 @@ const settings = {
   errorClass: "modal__error_visible",
 };
 
-const showInputError = (formEl, inputEl, errorMsg, config) => {
+const showInputError = (formEl, inputEl, errorMsg,config) => {
   const errorMsgEl = formEl.querySelector(`#${inputEl.id}-error`);
   if (errorMsgEl) {
     errorMsgEl.textContent = errorMsg;
-    inputEl.classList.add(settings.inputErrorClass);
+    inputEl.classList.add(config.inputErrorClass);
   }
 };
 
@@ -20,7 +19,7 @@ const hideInputError = (formEl, inputEl, config) => {
   const errorMsgEl = document.querySelector(`#${inputEl.id}-error`);
   if (errorMsgEl) {
     errorMsgEl.textContent = "";
-    inputEl.classList.remove(settings.inputErrorClass);
+    inputEl.classList.remove(config.inputErrorClass);
   }
 };
 
@@ -39,10 +38,10 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-const resetValidation = (formEl) => {
+const resetValidation = (formEl, config) => {
   const inputs = formEl.querySelectorAll(settings.inputSelector);
   inputs.forEach((inputEl) => {
-    hideInputError(formEl, inputEl);
+    hideInputError(formEl, inputEl, config);
     inputEl.removeAttribute("aria-describedby");
   });
 

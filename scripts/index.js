@@ -134,19 +134,19 @@ function handleAddCardSubmit(evt) {
   const cardElement = getCardElement(inputValues);
   if (cardElement) {
     cardsList.prepend(cardElement);
+    closeModal(cardModal);
   }
 
   cardForm.reset();
-  disableButton(cardSubmitBtn);
-  closeModal(cardModal);
+  disableButton(cardSubmitBtn, settings);
 }
 
-resetValidation(editFormElement);
+
 
 profileEditButton.addEventListener("click", () => {
   editModalNameInput.value = profileName.textContent;
   editModalDescriptionInput.value = profileDescription.textContent;
-  resetValidation(editFormElement);
+  resetValidation(editFormElement, settings);
   openModal(editProfileModal);
 });
 
@@ -155,19 +155,14 @@ editProfileCloseBtn.addEventListener("click", () => {
 });
 
 cardBtn.addEventListener("click", () => {
-  resetValidation(cardForm);
   openModal(cardModal);
 });
 
-const closeButtons = document.querySelectorAll(".modal__close-btn");
-
-closeButtons.forEach((button) => {
-  const modal = button.closest(".modal");
-  button.addEventListener("click", () => closeModal(modal));
-});
-
-previewModalCloseBtn.addEventListener("click", () => {
-  closeModal(previewModal);
+document.addEventListener("click", (event) => {
+  if (event.target.classList.contains("modal__close-btn")) {
+    const modal = event.target.closest(".modal");
+    closeModal(modal);
+  }
 });
 
 editFormElement.addEventListener("submit", handleEditFormSubmit);

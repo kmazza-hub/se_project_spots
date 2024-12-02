@@ -207,8 +207,8 @@ margin-top: 8px;
   }
 
   .modal__closed-btn {
-    top: 16px;
-    right: 15px;
+    top: 12px;
+    right: 12px;
   }
 
   .modal__label {
@@ -224,9 +224,7 @@ margin-top: 8px;
   }
 
   .modal__close-btn_type_preview {
-    top: -28px;
-    right: 8px;
-    left: auto;
+    top: -36px;
   }
 }
 
@@ -235,6 +233,19 @@ margin-top: 8px;
     width: 300px;
     padding: 22px 12px 12px;
   }
+}
+
+@media (max-width: 320px) {
+  .modal__close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+}
+.modal__close-btn_type_preview {
+  top: -36px;
+  right: 8px;
+  left: auto;
 }
 
 
