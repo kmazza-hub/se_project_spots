@@ -88,61 +88,39 @@ function getCardElement(data) {
   return cardElement;
 }
 
+// Open a modal
 function openModal(modal) {
   modal.classList.add("modal_is-opened");
-  if (!modal.hasAttribute("data-event-attached")) {
-    document.addEventListener("keydown", handleEsc);
-    modal.addEventListener("click", handleOverlay);
-    modal.setAttribute("data-event-attached", "true");
-  }
+  modal.focus(); // Focus on the modal for accessibility
 }
 
+// Close a modal
 function closeModal(modal) {
   modal.classList.remove("modal_is-opened");
-  document.removeEventListener("keydown", handleEsc);
-  modal.removeEventListener("click", handleOverlay);
-  modal.removeAttribute("data-event-attached");
 }
 
-function handleEsc(evt) {
+// Global listener for Escape key
+document.addEventListener("keydown", (evt) => {
   if (evt.key === "Escape") {
-    const currentlyOpenedModal = document.querySelector(".modal_is-opened");
-    closeModal(currentlyOpenedModal);
+    const openedModal = document.querySelector(".modal_is-opened");
+    if (openedModal) closeModal(openedModal);
   }
-}
+});
 
-function handleOverlay(evt) {
+// Handle overlay clicks globally
+document.addEventListener("click", (evt) => {
   if (evt.target.classList.contains("modal")) {
     closeModal(evt.target);
   }
-}
+});
 
-function handleEditFormSubmit(evt) {
-  evt.preventDefault();
-  profileName.textContent = editModalNameInput.value;
-  profileDescription.textContent = editModalDescriptionInput.value;
-  closeModal(editProfileModal);
-}
+// Add cards to the UI from initial data
+initialCards.forEach((card) => {
+  const cardElement = getCardElement(card);
+  cardsList.append(cardElement);
+});
 
-function handleAddCardSubmit(evt) {
-  evt.preventDefault();
-  const inputValues = {
-    name: cardNameInput.value,
-    link: cardLinkInput.value,
-  };
-
-  const cardElement = getCardElement(inputValues);
-  if (cardElement) {
-    cardsList.prepend(cardElement);
-    closeModal(cardModal);
-  }
-
-  cardForm.reset();
-  disableButton(cardSubmitBtn, settings);
-}
-
-
-
+// Open "Edit Profile" Modal
 profileEditButton.addEventListener("click", () => {
   editModalNameInput.value = profileName.textContent;
   editModalDescriptionInput.value = profileDescription.textContent;
@@ -150,27 +128,45 @@ profileEditButton.addEventListener("click", () => {
   openModal(editProfileModal);
 });
 
-editProfileCloseBtn.addEventListener("click", () => {
-  closeModal(editProfileModal);
-});
-
+// Open "Add Card" Modal
 cardBtn.addEventListener("click", () => {
+  resetValidation(cardForm, settings);
   openModal(cardModal);
 });
 
-document.addEventListener("click", (event) => {
-  if (event.target.classList.contains("modal__close-btn")) {
-    const modal = event.target.closest(".modal");
-    closeModal(modal);
-  }
+// Handle Profile Edit Form Submission
+editFormElement.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+  profileName.textContent = editModalNameInput.value;
+  profileDescription.textContent = editModalDescriptionInput.value;
+  closeModal(editProfileModal);
 });
 
-editFormElement.addEventListener("submit", handleEditFormSubmit);
+// Handle Add Card Form Submission
+cardForm.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+  const newCard = {
+    name: cardNameInput.value,
+    link: cardLinkInput.value,
+  };
+  const cardElement = getCardElement(newCard);
+  cardsList.prepend(cardElement);
+  closeModal(cardModal);
+  cardForm.reset();
+  resetValidation(cardForm, settings);
+});
 
-cardForm.addEventListener("submit", handleAddCardSubmit);
+// Add input validation handler
+cardForm.addEventListener("input", () => {
+  const isFormValid = cardNameInput.value.trim() && cardLinkInput.value.trim();
+  cardSubmitBtn.disabled = !isFormValid;
+  cardSubmitBtn.classList.toggle("modal__submit-btn_disabled", !isFormValid);
+});
 
-initialCards.forEach((item) => {
-  const cardElement = getCardElement(item);
-  cardsList.append(cardElement);
-
+// Attach close button listeners
+document.querySelectorAll(".modal__close-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const modal = btn.closest(".modal");
+    closeModal(modal);
+  });
 });
