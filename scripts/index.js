@@ -50,7 +50,7 @@ const cardModalCloseBtn = cardModal.querySelector(".modal__close-btn");
 const cardTemplate = document.querySelector("#card-template");
 const cardsList = document.querySelector(".cards__list");
 const cardBtn = document.querySelector(".profile__add-btn");
-const cardSubmitBtn = document.querySelector(".modal__submit-btn");
+const cardSubmitBtn = cardForm.querySelector(".modal__submit-btn");
 const cardNameInput = cardForm.querySelector("#add-card-name-input");
 const cardLinkInput = cardForm.querySelector("#add-card-link-input");
 
@@ -99,20 +99,25 @@ function closeModal(modal) {
   modal.classList.remove("modal_is-opened");
 }
 
-// Global listener for Escape key
-document.addEventListener("keydown", (evt) => {
+function handleEscape(evt) {
   if (evt.key === "Escape") {
-    const openedModal = document.querySelector(".modal_is-opened");
-    if (openedModal) closeModal(openedModal);
+    const openedPopup = document.querySelector(".modal_is-opened"); // Find the opened modal
+    if (openedPopup) closeModal(openedPopup); // Close the modal if one is open
   }
-});
+}
 
-// Handle overlay clicks globally
-document.addEventListener("click", (evt) => {
-  if (evt.target.classList.contains("modal")) {
-    closeModal(evt.target);
-  }
-});
+function openModal(modal) {
+  modal.classList.add("modal_is-opened");
+  modal.focus(); // Focus on the modal for accessibility
+  document.addEventListener("keydown", handleEscape); // Add Escape key listener
+}
+
+function closeModal(modal) {
+  modal.classList.remove("modal_is-opened");
+  document.removeEventListener("keydown", handleEscape); // Remove Escape key listener
+}
+
+
 
 // Add cards to the UI from initial data
 initialCards.forEach((card) => {
@@ -130,7 +135,6 @@ profileEditButton.addEventListener("click", () => {
 
 // Open "Add Card" Modal
 cardBtn.addEventListener("click", () => {
-  resetValidation(cardForm, settings);
   openModal(cardModal);
 });
 
@@ -153,14 +157,7 @@ cardForm.addEventListener("submit", (evt) => {
   cardsList.prepend(cardElement);
   closeModal(cardModal);
   cardForm.reset();
-  resetValidation(cardForm, settings);
-});
-
-// Add input validation handler
-cardForm.addEventListener("input", () => {
-  const isFormValid = cardNameInput.value.trim() && cardLinkInput.value.trim();
-  cardSubmitBtn.disabled = !isFormValid;
-  cardSubmitBtn.classList.toggle("modal__submit-btn_disabled", !isFormValid);
+  disableButton(cardSubmitBtn, settings);
 });
 
 // Attach close button listeners
