@@ -88,15 +88,17 @@ function getCardElement(data) {
   return cardElement;
 }
 
-// Open a modal
 function openModal(modal) {
   modal.classList.add("modal_is-opened");
   modal.focus(); // Focus on the modal for accessibility
+  document.addEventListener("keydown", handleEscape);
+  modal.addEventListener("click", handleOverlay);
 }
 
-// Close a modal
 function closeModal(modal) {
   modal.classList.remove("modal_is-opened");
+  document.removeEventListener("keydown", handleEscape);
+  modal.removeEventListener("click", handleOverlay);
 }
 
 function handleEscape(evt) {
@@ -106,18 +108,11 @@ function handleEscape(evt) {
   }
 }
 
-function openModal(modal) {
-  modal.classList.add("modal_is-opened");
-  modal.focus(); // Focus on the modal for accessibility
-  document.addEventListener("keydown", handleEscape); // Add Escape key listener
+function handleOverlay(evt) {
+  if (evt.target.classList.contains("modal")) {
+    closeModal(evt.target);
+  }
 }
-
-function closeModal(modal) {
-  modal.classList.remove("modal_is-opened");
-  document.removeEventListener("keydown", handleEscape); // Remove Escape key listener
-}
-
-
 
 // Add cards to the UI from initial data
 initialCards.forEach((card) => {
